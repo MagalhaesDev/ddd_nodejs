@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
 import { GetQuestionBySlugUseCase } from './get-question-by-slug'
 import { Question } from '../../enterprise/entities/question'
@@ -31,3 +32,28 @@ describe('Get Question By Slug', () => {
     expect(question.title).toEqual(newQuestion.title)
   })
 })
+=======
+import { CreateQuestionUseCase } from "./create-question";
+import { InMemoryQuestionsRepository } from "test/repositories/in-memory-questions-repository";
+
+let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
+let sut: CreateQuestionUseCase;
+
+describe("Create Question", () => {
+  beforeEach(() => {
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository();
+    sut = new CreateQuestionUseCase(inMemoryQuestionsRepository);
+  });
+
+  it("should be able to create a question", async () => {
+    const { question } = await sut.execute({
+      authorId: "1",
+      title: "New question",
+      content: "content question",
+    });
+
+    expect(question.id).toBeTruthy();
+    expect(inMemoryQuestionsRepository.items[0].id).toEqual(question.id);
+  });
+});
+>>>>>>> origin/main
